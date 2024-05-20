@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/style.css" />
     <title>Excalibur + Vite</title>
   </head>
-  <body>
+  <body class="flex h-screen justify-center items-center">
+    <div id="container" class="h-full relative">
+      <canvas id="game"></canvas>
+      <div
+        id="menu"
+        class="pointer-events-none select-none absolute top-0 left-0 right-0 bottom-0 border"
+      ></div>
+    </div>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>
