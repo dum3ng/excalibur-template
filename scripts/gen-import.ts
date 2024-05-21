@@ -11,7 +11,6 @@ function camelcase(s: string) {
 
 async function genImport(dir: string) {
   const files = await fsp.readdir(dir)
-  console.log(files)
   for (const file of files) {
     const realPath = path.join(dir, file)
     const s = await fsp.stat(realPath)
@@ -24,7 +23,7 @@ async function genImport(dir: string) {
         name = camelcase(parsed.ext.substring(1)) + name
       }
       const imp = `export { default as ${name} } from '${path.relative(
-        target,
+        path.dirname(target),
         realPath,
       )}'`
       res.push(imp)
@@ -33,8 +32,5 @@ async function genImport(dir: string) {
 }
 
 const assetsDir = path.resolve(__dirname, '../src/assets')
-console.log(assetsDir)
-console.log(path.relative(__dirname, assetsDir))
 await genImport(assetsDir)
 await fsp.writeFile(target, res.join('\n'))
-// console.log(res)
